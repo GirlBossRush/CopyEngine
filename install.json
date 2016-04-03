@@ -21,7 +21,7 @@
   },
   "options": {
     "properties": {
-      "element": {
+      "location": {
         "title": "Editable content location",
         "description": "Where should the editable content appear on the page?",
         "order": 0,
@@ -30,6 +30,39 @@
         "default": {
           "selector": "body",
           "method": "prepend"
+        }
+      },
+      "articles": {
+        "order": 1,
+        "type": "array",
+        "title": "Articles",
+        "description": "Articles can be accessed at <code>yoursite.com/#!/article-name</code>",
+        "items": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "order": 1,
+              "title": "What should the URL be to access the article?",
+              "description": "foo. {options}",
+              "placeholder": "/my-article-url",
+              "type": "string"
+            },
+            "content": {
+              "order": 2,
+              "title": "Article content",
+              "description": "Your article formated with <a target='_blank' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>Markdown</a>.",
+              "placeholder": "Article content",
+              "type": "object",
+              "format": "markdown"
+            },
+            "imageSrc": {
+              "order": 3,
+              "title": "Article image",
+              "description": "Insert an image above your article content.",
+              "type": "string",
+              "format": "image"
+            }
+          }
         }
       }
     }
