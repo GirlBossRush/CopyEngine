@@ -43,14 +43,14 @@
             "path": {
               "order": 1,
               "title": "What should the URL be to access the article?",
-              "description": "foo. {options}",
+              "description": "View at <a target='_blank' href='#'>{siteUrl}/#!{value}</a>",
               "placeholder": "/my-article-url",
               "type": "string"
             },
             "content": {
               "order": 2,
               "title": "Article content",
-              "description": "Your article formated with <a target='_blank' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>Markdown</a>.",
+              "description": "Your article formated with <a target='_blank' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>Markdown</a>.",
               "placeholder": "Article content",
               "type": "object",
               "format": "markdown"
