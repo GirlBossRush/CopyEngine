@@ -1,59 +1,46 @@
 "use strict";
 
 (function () {
-  "use strict";
-
   if (!window.addEventListener) return; // Check for IE9+
 
-  var element = void 0;
+  var elements = [];
   var options = INSTALL_OPTIONS;
 
-  function render(_ref) {
-    var content = _ref.content;
-    var imageSrc = _ref.imageSrc;
-    var path = _ref.path;
+  function updateElements() {
+    var _options = options;
+    var regions = _options.regions;
 
-    element = Eager.createElement(options.location, element);
 
-    element.innerHTML = content.html;
-    element.classList.add("eager-article");
-    element.dataset.eagerArticlePath = path;
+    regions.reverse() // Match insertion order of configuration UI.
+    .filter(function ($) {
+      return $.content && $.content.markdown;
+    }) // Blank regions
+    .forEach(function (_ref, index) {
+      var content = _ref.content;
+      var location = _ref.location;
 
-    if (imageSrc) {
-      var _element = element;
-      var firstChild = _element.firstChild;
+      var element = elements[index] = Eager.createElement(location, elements[index]);
 
-      var image = Object.assign(document.createElement("img"), {
-        className: "eager-hero",
-        src: imageSrc
-      });
-
-      firstChild ? element.insertBefore(image, firstChild) : element.appendChild(image);
-    }
-  }
-
-  function checkHash() {
-    var path = window.location.hash.split("#!")[1] || "/";
-    var article = options.articles.find(function ($) {
-      return $.path === path;
+      element.innerHTML = content.html;
+      element.classList.add("eager-region");
     });
-
-    if (article) render(article);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", checkHash);
+    document.addEventListener("DOMContentLoaded", updateElements);
   } else {
-    checkHash();
+    updateElements();
   }
-
-  window.addEventListener("hashchange", checkHash);
 
   INSTALL_SCOPE = {
     setOptions: function setOptions(nextOptions) {
+      elements.forEach(function (element) {
+        return Eager.createElement(null, element);
+      });
+
       options = nextOptions;
 
-      checkHash();
+      updateElements();
     }
   };
 })();

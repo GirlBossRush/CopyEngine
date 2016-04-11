@@ -1,50 +1,37 @@
 (function() {
-  "use strict"
-
   if (!window.addEventListener) return // Check for IE9+
 
-  let element
+  const elements = []
   let options = INSTALL_OPTIONS
 
-  function render({content, imageSrc, path}) {
-    element = Eager.createElement(options.location, element)
+  function updateElements() {
+    const {regions} = options
 
-    element.innerHTML = content.html
-    element.classList.add("eager-article")
-    element.dataset.eagerArticlePath = path
+    regions
+      .reverse() // Match insertion order of configuration UI.
+      .filter($ => $.content && $.content.markdown) // Blank regions
+      .forEach(({content, location}, index) => {
+        const element = elements[index] = Eager.createElement(location, elements[index])
 
-    if (imageSrc) {
-      const {firstChild} = element
-      const image = Object.assign(document.createElement("img"), {
-        className: "eager-hero",
-        src: imageSrc
+        element.innerHTML = content.html
+        element.classList.add("eager-region")
       })
-
-      firstChild ? element.insertBefore(image, firstChild) : element.appendChild(image)
-    }
-  }
-
-  function checkHash() {
-    const path = window.location.hash.split("#!")[1] || "/"
-    const article = options.articles.find($ => $.path === path)
-
-    if (article) render(article)
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", checkHash)
+    document.addEventListener("DOMContentLoaded", updateElements)
   }
   else {
-    checkHash()
+    updateElements()
   }
-
-  window.addEventListener("hashchange", checkHash)
 
   INSTALL_SCOPE = {
     setOptions(nextOptions) {
+      elements.forEach(element => Eager.createElement(null, element))
+
       options = nextOptions
 
-      checkHash()
+      updateElements()
     }
   }
 }())

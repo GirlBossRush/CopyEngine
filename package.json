@@ -1,7 +1,7 @@
 {
-  "name": "eager-blog-engine",
+  "name": "eager-copy-engine",
   "version": "0.0.0",
-  "description": "A blog engine built [Eager](https://eager.io).",
+  "description": "A copy engine built [Eager](https://eager.io).",
   "main": "app.js",
   "scripts": {
     "start": "babel --watch --out-dir build app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TeffenEllis/BlogEngine.git"
+    "url": "git+https://github.com/TeffenEllis/CopyEngine.git"
   },
-  "author": "Eager Platform Co.",
+  "author": "Teffen Ellis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TeffenEllis/BlogEngine/issues"
+    "url": "https://github.com/TeffenEllis/CopyEngine/issues"
   },
-  "homepage": "https://github.com/TeffenEllis/BlogEngine#readme",
+  "homepage": "https://github.com/TeffenEllis/CopyEngine#readme",
   "dependencies": {
   },
   "devDependencies": {

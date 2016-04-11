@@ -21,46 +21,33 @@
   },
   "options": {
     "properties": {
-      "location": {
-        "title": "Editable content location",
-        "description": "Where should the editable content appear on the page?",
-        "order": 0,
-        "type": "object",
-        "format": "element",
-        "default": {
-          "selector": "body",
-          "method": "prepend"
-        }
-      },
-      "articles": {
+      "regions": {
         "order": 1,
         "type": "array",
-        "title": "Articles",
-        "description": "Articles can be accessed at <code>yoursite.com/#!/article-name</code>",
+        "title": "Regions",
+        "description": "Text on the page to be inserted or replaced.",
         "items": {
           "type": "object",
           "properties": {
-            "path": {
-              "order": 1,
-              "title": "What should the URL be to access the article?",
-              "description": "View at <a target='_blank' href='#'>{siteUrl}/#!{value}</a>",
-              "placeholder": "/my-article-url",
-              "type": "string"
+            "location": {
+              "title": "Region Location",
+              "description": "Where should the content appear on the page?",
+              "order": 0,
+              "type": "object",
+              "format": "element",
+              "default": {
+                "selector": "body",
+                "method": "prepend"
+              }
             },
+
             "content": {
               "order": 2,
-              "title": "Article content",
-              "description": "Your article formated with <a target='_blank' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>Markdown</a>.",
-              "placeholder": "Article content",
+              "title": "Region content",
+              "description": "Your content formatted with <a target='_blank' href='https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'>Markdown</a>.",
+              "placeholder": "What text should appear in the region?",
               "type": "object",
               "format": "markdown"
-            },
-            "imageSrc": {
-              "order": 3,
-              "title": "Article image",
-              "description": "Insert an image above your article content.",
-              "type": "string",
-              "format": "image"
             }
           }
         }
